@@ -1,17 +1,15 @@
 import React, { Fragment } from 'react';
-import { Order, ShippingMethod } from '../../models';
+import { useFormContext } from 'react-hook-form';
+import { ShippingMethod } from '../../models';
 
 export interface ShippingOptionsFormProps {
-    order: Order;
     onShippingMethodChanged: (shippingMethod: ShippingMethod) => void;
 }
 
 export const ShippingOptionsForm = ({
-    order,
     onShippingMethodChanged,
 }: ShippingOptionsFormProps) => {
-    const { shippingOptions } = order;
-    const { shippingMethod, giftWrapping } = shippingOptions;
+    const { register } = useFormContext();
 
     const handleShippingMethodChanged = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -27,10 +25,10 @@ export const ShippingOptionsForm = ({
                     <input
                         id="ground"
                         value="ground"
-                        name="shippingMethod"
+                        name="shippingOptions.shippingMethod"
                         type="radio"
                         className="form-check-input"
-                        defaultChecked={shippingMethod === 'ground'}
+                        ref={register}
                         onChange={handleShippingMethodChanged}
                     />
                     <label className="form-check-label" htmlFor="ground">
@@ -41,10 +39,10 @@ export const ShippingOptionsForm = ({
                     <input
                         id="secondDay"
                         value="secondDay"
-                        name="shippingMethod"
+                        name="shippingOptions.shippingMethod"
                         type="radio"
                         className="form-check-input"
-                        defaultChecked={shippingMethod === 'secondDay'}
+                        ref={register}
                         onChange={handleShippingMethodChanged}
                     />
                     <label className="form-check-label" htmlFor="second-day">
@@ -55,10 +53,10 @@ export const ShippingOptionsForm = ({
                     <input
                         id="overnight"
                         value="overnight"
-                        name="shippingMethod"
+                        name="shippingOptions.shippingMethod"
                         type="radio"
                         className="form-check-input"
-                        defaultChecked={shippingMethod === 'overnight'}
+                        ref={register}
                         onChange={handleShippingMethodChanged}
                     />
                     <label className="form-check-label" htmlFor="overnight">
@@ -68,13 +66,14 @@ export const ShippingOptionsForm = ({
             </div>
             <div className="form-check form-check-inline">
                 <input
-                    className="form-check-input"
+                    id="giftWrapping"
+                    value="giftWrapping"
+                    name="shippingOptions.giftWrapping"
                     type="checkbox"
-                    id="gift-wrapping"
-                    value="gift-wrapping"
-                    defaultChecked={giftWrapping}
+                    className="form-check-input"
+                    ref={register}
                 />
-                <label className="form-check-label" htmlFor="gift-wrapping">
+                <label className="form-check-label" htmlFor="giftWrapping">
                     Gift wrapping
                 </label>
             </div>

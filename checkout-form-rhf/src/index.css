@@ -6,3 +6,9 @@ body {
 .container {
     max-width: 960px;
 }
+
+.helper-text {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+}

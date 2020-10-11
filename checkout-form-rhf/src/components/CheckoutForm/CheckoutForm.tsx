@@ -1,6 +1,6 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Order, ShippingMethod } from '../../models';
 import { AddressForm } from '../AddressForm';
@@ -11,7 +11,10 @@ import { CheckoutActions } from './CheckoutActions';
 
 const schema = yup.object().shape({
     contactInfo: yup.object().shape({
-        email: yup.string().email().required(),
+        email: yup
+            .string()
+            .email('Email must be a valid email')
+            .required('Email is a required field'),
     }),
 });
 
@@ -26,27 +29,30 @@ export const CheckoutForm = ({
     onSubmit,
     onShippingMethodChanged,
 }: CheckoutFormProps) => {
-    const { handleSubmit } = useForm({
+    const methods = useForm<Order>({
+        mode: 'onBlur',
+        defaultValues: order,
         resolver: yupResolver(schema),
     });
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <ContactInfoForm order={order} />
-            <hr className="mt-4 mb3" />
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <ContactInfoForm />
+                <hr className="mt-4 mb3" />
 
-            <AddressForm />
-            <hr className="mt-4 mb3" />
+                <AddressForm />
+                <hr className="mt-4 mb3" />
 
-            <ShippingOptionsForm
-                order={order}
-                onShippingMethodChanged={onShippingMethodChanged}
-            />
-            <hr className="mt-4 mb3" />
+                <ShippingOptionsForm
+                    onShippingMethodChanged={onShippingMethodChanged}
+                />
+                <hr className="mt-4 mb3" />
 
-            <PaymentForm />
+                <PaymentForm />
 
-            <CheckoutActions order={order} />
-        </form>
+                <CheckoutActions order={order} />
+            </form>
+        </FormProvider>
     );
 };

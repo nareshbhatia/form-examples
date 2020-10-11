@@ -1,14 +1,8 @@
 import React, { Fragment } from 'react';
-import { useForm } from 'react-hook-form';
-import { Order } from '../../models';
+import { useFormContext } from 'react-hook-form';
 
-export interface ContactInfoFormProps {
-    order: Order;
-}
-
-export const ContactInfoForm = ({ order }: ContactInfoFormProps) => {
-    const { contactInfo } = order;
-    const { register } = useForm();
+export const ContactInfoForm = () => {
+    const { errors, register } = useFormContext();
 
     return (
         <Fragment>
@@ -20,12 +14,13 @@ export const ContactInfoForm = ({ order }: ContactInfoFormProps) => {
                     name="contactInfo.email"
                     type="text"
                     className="form-control form-control-sm"
-                    defaultValue={contactInfo.email}
                     ref={register}
                 />
-                <div className="invalid-feedback">
-                    Please enter a valid email address for shipping updates.
-                </div>
+                {errors.contactInfo?.email !== undefined ? (
+                    <div className="helper-text text-danger">
+                        {errors.contactInfo?.email.message}
+                    </div>
+                ) : null}
             </div>
         </Fragment>
     );
