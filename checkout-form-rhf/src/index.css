@@ -1,0 +1,8 @@
+body {
+    /* add top padding to make room for the header */
+    padding-top: 4.5rem;
+}
+
+.container {
+    max-width: 960px;
+}
