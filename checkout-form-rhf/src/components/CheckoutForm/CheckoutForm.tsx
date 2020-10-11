@@ -51,7 +51,9 @@ export const CheckoutForm = ({
 
                 <PaymentForm />
 
-                <CheckoutActions order={order} />
+                <CheckoutActions
+                    orderTotal={Order.getOrderTotal(order).orderTotal}
+                />
             </form>
         </FormProvider>
     );

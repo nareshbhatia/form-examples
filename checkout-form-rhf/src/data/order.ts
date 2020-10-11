@@ -27,7 +27,6 @@ export const order: Order = {
             qty: 1,
         },
     ],
-    shippingCharges: 20.0,
     contactInfo: {
         email: 'michael.jackson@gmail.com',
     },

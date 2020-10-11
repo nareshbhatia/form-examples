@@ -3,24 +3,22 @@ import { CheckoutForm, OrderSummary } from '../../components';
 import { useOrder, useOrderSetter } from '../../contexts';
 import { Order, ShippingMethod } from '../../models';
 
-const shippingRates: { [key in ShippingMethod]: number } = {
-    ground: 20.0,
-    secondDay: 40.0,
-    overnight: 60.0,
-};
-
 export const CheckoutPage = () => {
     const order = useOrder();
     const setOrder = useOrderSetter();
 
     const handleSubmit = (order: Order) => {
         console.log(order);
+        setOrder(order);
     };
 
     const handleShippingMethodChanged = (shippingMethod: ShippingMethod) => {
         setOrder({
             ...order,
-            shippingCharges: shippingRates[shippingMethod],
+            shippingOptions: {
+                ...order.shippingOptions,
+                shippingMethod,
+            },
         });
     };
 

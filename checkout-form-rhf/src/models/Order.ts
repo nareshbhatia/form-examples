@@ -1,10 +1,9 @@
 import { ContactInfo } from './ContactInfo';
 import { OrderItem } from './OrderItem';
-import { ShippingOptions } from './ShippingOptions';
+import { ShippingOptions, ShippingRates } from './ShippingOptions';
 
 export interface Order {
     orderItems: Array<OrderItem>;
-    shippingCharges: number;
     contactInfo: ContactInfo;
     shippingOptions: ShippingOptions;
 }
@@ -16,9 +15,13 @@ export const Order = {
         }, 0);
     },
 
+    getShippingCharges: (order: Order) => {
+        return ShippingRates[order.shippingOptions.shippingMethod];
+    },
+
     getOrderTotal: (order: Order) => {
         const orderItemsTotal = Order.getOrderItemsTotal(order);
-        const { shippingCharges } = order;
+        const shippingCharges = Order.getShippingCharges(order);
         return {
             orderItemsTotal,
             shippingCharges,

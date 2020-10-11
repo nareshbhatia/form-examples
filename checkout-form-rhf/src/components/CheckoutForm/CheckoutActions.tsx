@@ -1,13 +1,11 @@
 import React from 'react';
 import { NumberUtils } from '@react-force/number-utils';
-import { Order } from '../../models';
 
 export interface CheckoutActionsProps {
-    order: Order;
+    orderTotal: number;
 }
 
-export const CheckoutActions = ({ order }: CheckoutActionsProps) => {
-    const orderTotal = Order.getOrderTotal(order).orderTotal;
+export const CheckoutActions = ({ orderTotal }: CheckoutActionsProps) => {
     const orderTotalStr = NumberUtils.formatAsMoney(orderTotal);
 
     return (

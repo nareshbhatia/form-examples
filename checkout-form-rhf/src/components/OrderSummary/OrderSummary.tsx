@@ -7,8 +7,13 @@ export interface OrderSummaryProps {
 }
 
 export const OrderSummary = ({ order }: OrderSummaryProps) => {
-    const { orderItems, shippingCharges } = order;
-    const orderTotal = Order.getOrderTotal(order).orderTotal;
+    const { orderItems } = order;
+    const {
+        orderItemsTotal,
+        shippingCharges,
+        orderTotal,
+    } = Order.getOrderTotal(order);
+    const orderItemsTotalStr = NumberUtils.formatAsMoney(orderItemsTotal);
     const shippingChargesStr = NumberUtils.formatAsMoney(shippingCharges);
     const orderTotalStr = NumberUtils.formatAsMoney(orderTotal);
 
@@ -43,7 +48,7 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
                 <li className="list-group-item">
                     <div className="d-flex justify-content-between">
                         <span>Items</span>
-                        <strong>$960.00</strong>
+                        <strong>${orderItemsTotalStr}</strong>
                     </div>
                     <div className="d-flex justify-content-between">
                         <span>Shipping & handling</span>
