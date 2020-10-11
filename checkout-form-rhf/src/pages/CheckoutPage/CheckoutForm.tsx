@@ -3,10 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { Order, ShippingMethod } from '../../models';
-import { AddressForm } from '../AddressForm';
-import { ContactInfoForm } from '../ContactInfoForm';
-import { PaymentForm } from '../PaymentForm';
-import { ShippingOptionsForm } from '../ShippingOptionsForm';
+import {
+    AddressForm,
+    ContactInfoForm,
+    PaymentForm,
+    ShippingOptionsForm,
+} from '../../components';
 import { CheckoutActions } from './CheckoutActions';
 
 const schema = yup.object().shape({

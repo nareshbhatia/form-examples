@@ -1,7 +1,8 @@
 import React from 'react';
-import { CheckoutForm, OrderSummary } from '../../components';
+import { OrderSummary } from '../../components';
 import { useOrder, useOrderSetter } from '../../contexts';
 import { Order, ShippingMethod } from '../../models';
+import { CheckoutForm } from './CheckoutForm';
 
 export const CheckoutPage = () => {
     const order = useOrder();
