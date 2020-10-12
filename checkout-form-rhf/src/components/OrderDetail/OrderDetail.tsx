@@ -1,12 +1,17 @@
 import React, { Fragment } from 'react';
-import { Order, ShippingMethodNames } from '../../models';
+import { Order, PaymentMethodNames, ShippingMethodNames } from '../../models';
 
 export interface OrderDetailProps {
     order: Order;
 }
 
 export const OrderDetail = ({ order }: OrderDetailProps) => {
-    const { contactInfo, shippingAddress, shippingOptions } = order;
+    const {
+        contactInfo,
+        shippingAddress,
+        shippingOptions,
+        paymentMethod,
+    } = order;
 
     return (
         <Fragment>
@@ -36,6 +41,13 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
                     {ShippingMethodNames[shippingOptions.shippingMethod]}
                     <br />
                     Gift wrapping: {shippingOptions.giftWrapping ? 'Yes' : 'No'}
+                </p>
+
+                <h6 className="mb-0">Payment Method</h6>
+                <p>
+                    {PaymentMethodNames[paymentMethod]}
+                    <br />
+                    Payment Details
                 </p>
             </div>
         </Fragment>

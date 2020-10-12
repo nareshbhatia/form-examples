@@ -29,6 +29,15 @@ const schema = yup.object().shape({
         state: yup.string().required('State is a required field'),
         zip: yup.string().required('Zip is a required field'),
     }),
+    shippingOptions: yup.object().shape({
+        shippingMethod: yup
+            .string()
+            .required('Shipping method is a required field'),
+        giftWrapping: yup
+            .boolean()
+            .required('Gift wrapping is a required field'),
+    }),
+    paymentMethod: yup.string().required('Payment method is a required field'),
 });
 
 export interface CheckoutFormProps {

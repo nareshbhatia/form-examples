@@ -34,4 +34,5 @@ export const order: Order = {
         shippingMethod: 'ground',
         giftWrapping: false,
     },
+    paymentMethod: 'creditCard',
 };
