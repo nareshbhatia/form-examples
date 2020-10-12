@@ -19,9 +19,6 @@ export interface TextFieldProps {
     label?: React.ReactNode;
 
     /** passed directly to the input element */
-    type?: string;
-
-    /** passed directly to the input element */
     ref?: React.Ref<any>;
 
     /** error text */
@@ -41,7 +38,6 @@ export const TextField = React.forwardRef(
             id,
             name,
             label,
-            type,
             error,
             renderContainer = (props) => <input {...props} />,
         }: TextFieldProps,
@@ -55,7 +51,7 @@ export const TextField = React.forwardRef(
                 {renderContainer({
                     id,
                     name,
-                    type,
+                    type: 'text',
                     ref,
                     className: 'form-control form-control-sm',
                 })}

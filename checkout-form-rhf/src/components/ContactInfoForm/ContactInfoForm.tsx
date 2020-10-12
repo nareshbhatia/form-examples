@@ -13,7 +13,6 @@ export const ContactInfoForm = () => {
                     id="email"
                     name="contactInfo.email"
                     label="Email"
-                    type="text"
                     ref={register}
                     error={errors.contactInfo?.email?.message}
                 />
