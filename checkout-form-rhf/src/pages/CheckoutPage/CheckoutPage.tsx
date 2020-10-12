@@ -8,9 +8,16 @@ export const CheckoutPage = () => {
     const order = useOrder();
     const setOrder = useOrderSetter();
 
-    const handleSubmit = (order: Order) => {
-        console.log(order);
-        setOrder(order);
+    /**
+     * Note that `changedOrder` does not have orderItems,
+     * so it must be merged with existing order.
+     */
+    const handleSubmit = (changedOrder: Order) => {
+        console.log(changedOrder);
+        setOrder({
+            ...order,
+            ...changedOrder,
+        });
     };
 
     const handleShippingMethodChanged = (shippingMethod: ShippingMethod) => {

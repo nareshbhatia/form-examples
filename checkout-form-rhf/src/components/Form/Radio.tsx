@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 interface InputInjectedProps {
     id?: string;
+    value?: string;
     name?: string;
     type?: string;
     ref?: React.Ref<any>;
@@ -10,9 +11,12 @@ interface InputInjectedProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface TextFieldProps {
+export interface RadioProps {
     /** used to make label and errorText accessible for screen readers */
     id?: string;
+
+    /** used to make label and errorText accessible for screen readers */
+    value?: string;
 
     /** passed directly to the input element */
     name?: string;
@@ -37,37 +41,41 @@ export interface TextFieldProps {
  * doesn't understand.
  * See https://blog.andrewbran.ch/polymorphic-react-components/
  */
-export const TextField = React.forwardRef(
+export const Radio = React.forwardRef(
     (
         {
             id,
+            value,
             name,
             label,
             error,
             renderContainer = (props) => <input {...props} />,
             onBlur,
             onChange,
-        }: TextFieldProps,
+        }: RadioProps,
         ref
     ) => {
         return (
-            <Fragment>
-                {label !== undefined ? (
-                    <label htmlFor={id}>{label}</label>
-                ) : null}
+            <div className="form-check form-check-inline">
                 {renderContainer({
                     id,
+                    value,
                     name,
-                    type: 'text',
+                    type: 'radio',
                     ref,
-                    className: 'form-control form-control-sm',
+                    className: 'form-check-input',
                     onBlur,
                     onChange,
                 })}
+                {label !== undefined ? (
+                    <label className="form-check-label" htmlFor={id}>
+                        {label}
+                    </label>
+                ) : null}
                 {error !== undefined ? (
                     <div className="error-text">{error}</div>
                 ) : null}
-            </Fragment>
+            </div>
         );
     }
 );

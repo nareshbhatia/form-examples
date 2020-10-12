@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 interface InputInjectedProps {
     id?: string;
@@ -10,7 +10,7 @@ interface InputInjectedProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface TextFieldProps {
+export interface CheckboxProps {
     /** used to make label and errorText accessible for screen readers */
     id?: string;
 
@@ -37,7 +37,7 @@ export interface TextFieldProps {
  * doesn't understand.
  * See https://blog.andrewbran.ch/polymorphic-react-components/
  */
-export const TextField = React.forwardRef(
+export const Checkbox = React.forwardRef(
     (
         {
             id,
@@ -47,27 +47,29 @@ export const TextField = React.forwardRef(
             renderContainer = (props) => <input {...props} />,
             onBlur,
             onChange,
-        }: TextFieldProps,
+        }: CheckboxProps,
         ref
     ) => {
         return (
-            <Fragment>
-                {label !== undefined ? (
-                    <label htmlFor={id}>{label}</label>
-                ) : null}
+            <div className="form-check form-check-inline">
                 {renderContainer({
                     id,
                     name,
-                    type: 'text',
+                    type: 'checkbox',
                     ref,
-                    className: 'form-control form-control-sm',
+                    className: 'form-check-input',
                     onBlur,
                     onChange,
                 })}
+                {label !== undefined ? (
+                    <label className="form-check-label" htmlFor={id}>
+                        {label}
+                    </label>
+                ) : null}
                 {error !== undefined ? (
                     <div className="error-text">{error}</div>
                 ) : null}
-            </Fragment>
+            </div>
         );
     }
 );
