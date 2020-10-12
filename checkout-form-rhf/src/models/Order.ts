@@ -1,3 +1,4 @@
+import { Address } from './Address';
 import { ContactInfo } from './ContactInfo';
 import { OrderItem } from './OrderItem';
 import { ShippingOptions, ShippingRates } from './ShippingOptions';
@@ -5,6 +6,7 @@ import { ShippingOptions, ShippingRates } from './ShippingOptions';
 export interface Order {
     orderItems: Array<OrderItem>;
     contactInfo: ContactInfo;
+    shippingAddress?: Address;
     shippingOptions: ShippingOptions;
 }
 

@@ -6,7 +6,7 @@ export interface OrderDetailProps {
 }
 
 export const OrderDetail = ({ order }: OrderDetailProps) => {
-    const { contactInfo, shippingOptions } = order;
+    const { contactInfo, shippingAddress, shippingOptions } = order;
 
     return (
         <Fragment>
@@ -14,6 +14,21 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
             <div className="border p-3">
                 <h6 className="mb-0">Contact Information</h6>
                 <p>Email: {contactInfo.email}</p>
+
+                {shippingAddress !== undefined ? (
+                    <Fragment>
+                        <h6 className="mb-0">Shipping Address</h6>
+                        <p>
+                            {shippingAddress.firstName}{' '}
+                            {shippingAddress.lastName}
+                            <br />
+                            {shippingAddress.address}
+                            <br />
+                            {shippingAddress.city}, {shippingAddress.state}{' '}
+                            {shippingAddress.zip}
+                        </p>
+                    </Fragment>
+                ) : null}
 
                 <h6 className="mb-0">Shipping Options</h6>
                 <p>

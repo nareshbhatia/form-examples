@@ -18,6 +18,17 @@ const schema = yup.object().shape({
             .email('Email must be a valid email')
             .required('Email is a required field'),
     }),
+    shippingAddress: yup.object().shape({
+        firstName: yup
+            .string()
+            .required('First name is a required field')
+            .min(2),
+        lastName: yup.string().required('Last name is a required field').min(2),
+        address: yup.string().required('Address is a required field'),
+        city: yup.string().required('City is a required field'),
+        state: yup.string().required('State is a required field'),
+        zip: yup.string().required('Zip is a required field'),
+    }),
 });
 
 export interface CheckoutFormProps {

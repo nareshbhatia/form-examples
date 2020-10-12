@@ -1,79 +1,71 @@
 import React, { Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { TextField } from '../Form';
 
 export const AddressForm = () => {
+    const { errors, register } = useFormContext();
+
     return (
         <Fragment>
             <h5 className="mb-3">Shipping Address</h5>
             <div className="row">
                 <div className="col-md-6 mb-3">
-                    <label htmlFor="firstName">First name</label>
-                    <input
+                    <TextField
                         id="firstName"
-                        type="text"
-                        className="form-control form-control-sm"
+                        name="shippingAddress.firstName"
+                        label="First name"
+                        ref={register}
+                        error={errors.shippingAddress?.firstName?.message}
                     />
-                    <div className="invalid-feedback">
-                        Valid first name is required.
-                    </div>
                 </div>
                 <div className="col-md-6 mb-3">
-                    <label htmlFor="lastName">Last name</label>
-                    <input
+                    <TextField
                         id="lastName"
-                        type="text"
-                        className="form-control form-control-sm"
+                        name="shippingAddress.lastName"
+                        label="Last name"
+                        ref={register}
+                        error={errors.shippingAddress?.lastName?.message}
                     />
-                    <div className="invalid-feedback">
-                        Valid last name is required.
-                    </div>
                 </div>
             </div>
 
             <div className="mb-3">
-                <label htmlFor="address">Address</label>
-                <input
+                <TextField
                     id="address"
-                    type="text"
-                    className="form-control form-control-sm"
+                    name="shippingAddress.address"
+                    label="Address"
+                    ref={register}
+                    error={errors.shippingAddress?.address?.message}
                 />
-                <div className="invalid-feedback">
-                    Please enter your shipping address.
-                </div>
             </div>
 
             <div className="row">
                 <div className="col-md-5 mb-3">
-                    <label htmlFor="city">City</label>
-                    <input
+                    <TextField
                         id="city"
-                        type="text"
-                        className="form-control form-control-sm"
+                        name="shippingAddress.city"
+                        label="City"
+                        ref={register}
+                        error={errors.shippingAddress?.city?.message}
                     />
-                    <div className="invalid-feedback">
-                        Please select a valid city.
-                    </div>
                 </div>
                 <div className="col-md-4 mb-3">
-                    <label htmlFor="state">State</label>
-                    <select
+                    <TextField
                         id="state"
-                        className="custom-select custom-select-sm d-block w-100"
-                    >
-                        <option value="">Choose...</option>
-                        <option>California</option>
-                    </select>
-                    <div className="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
+                        name="shippingAddress.state"
+                        label="State"
+                        ref={register}
+                        error={errors.shippingAddress?.state?.message}
+                    />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <label htmlFor="zip">Zip</label>
-                    <input
+                    <TextField
                         id="zip"
-                        type="text"
-                        className="form-control form-control-sm"
+                        name="shippingAddress.zip"
+                        label="Zip"
+                        ref={register}
+                        error={errors.shippingAddress?.zip?.message}
                     />
-                    <div className="invalid-feedback">Zip code required.</div>
                 </div>
             </div>
         </Fragment>
