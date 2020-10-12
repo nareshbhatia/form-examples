@@ -8,7 +8,7 @@ interface InputInjectedProps {
     className: string;
 }
 
-export interface InputFieldProps {
+export interface TextFieldProps {
     /** used to make label and errorText accessible for screen readers */
     id?: string;
 
@@ -35,7 +35,7 @@ export interface InputFieldProps {
  * doesn't understand.
  * See https://blog.andrewbran.ch/polymorphic-react-components/
  */
-export const InputField = React.forwardRef(
+export const TextField = React.forwardRef(
     (
         {
             id,
@@ -44,7 +44,7 @@ export const InputField = React.forwardRef(
             type,
             error,
             renderContainer = (props) => <input {...props} />,
-        }: InputFieldProps,
+        }: TextFieldProps,
         ref
     ) => {
         return (
