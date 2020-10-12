@@ -31,6 +31,16 @@ export const AddressForm = () => {
 
             <div className="mb-3">
                 <TextField
+                    id="company"
+                    name="shippingAddress.company"
+                    label="Company (optional)"
+                    ref={register}
+                    error={errors.shippingAddress?.company?.message}
+                />
+            </div>
+
+            <div className="mb-3">
+                <TextField
                     id="address"
                     name="shippingAddress.address"
                     label="Address"

@@ -1,60 +1,51 @@
 import React, { Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { TextField } from '../Form';
 
 export const BankAccountForm = () => {
+    const { errors, register } = useFormContext();
+
     return (
         <Fragment>
             <div className="mb-3">
-                <label htmlFor="bk-account-holder-name">
-                    Name on bank account
-                </label>
-                <input
-                    id="bk-account-holder-name"
-                    type="text"
-                    className="form-control form-control-sm"
+                <TextField
+                    id="accountHolderName"
+                    name="paymentMethod.accountHolderName"
+                    label="Account holder's name"
+                    ref={register}
+                    error={errors.paymentMethod?.accountHolderName?.message}
                 />
-                <div className="invalid-feedback">
-                    Please enter your the account holder's name.
-                </div>
             </div>
 
             <div className="mb-3">
-                <label htmlFor="bk-name">Bank name</label>
-                <input
-                    id="bk-name"
-                    type="text"
-                    className="form-control form-control-sm"
+                <TextField
+                    id="bankName"
+                    name="paymentMethod.bankName"
+                    label="Bank name"
+                    ref={register}
+                    error={errors.paymentMethod?.bankName?.message}
                 />
-                <div className="invalid-feedback">
-                    Please enter the name of the bank.
-                </div>
             </div>
 
             <div className="row">
                 <div className="col-md-6 mb-3">
-                    <label htmlFor="bk-routing-number">Routing number</label>
-                    <input
-                        id="bk-routing-number"
-                        type="text"
-                        className="form-control form-control-sm"
+                    <TextField
+                        id="routingNumber"
+                        name="paymentMethod.routingNumber"
+                        label="Routing number"
+                        ref={register}
+                        error={errors.paymentMethod?.routingNumber?.message}
                     />
-                    <small className="text-muted">9 digits - no spaces</small>
-                    <div className="invalid-feedback">
-                        Routing number is required
-                    </div>
                 </div>
+
                 <div className="col-md-6 mb-3">
-                    <label htmlFor="cc-number">Account number</label>
-                    <input
-                        id="bk-account-number"
-                        type="text"
-                        className="form-control form-control-sm"
+                    <TextField
+                        id="accountNumber"
+                        name="paymentMethod.accountNumber"
+                        label="Account number"
+                        ref={register}
+                        error={errors.paymentMethod?.accountNumber?.message}
                     />
-                    <small className="text-muted">
-                        9-12 digits - no spaces
-                    </small>
-                    <div className="invalid-feedback">
-                        Account number is required
-                    </div>
                 </div>
             </div>
         </Fragment>

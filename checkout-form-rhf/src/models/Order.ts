@@ -1,17 +1,15 @@
 import { Address } from './Address';
 import { ContactInfo } from './ContactInfo';
 import { OrderItem } from './OrderItem';
-import { BankAccount, CreditCard, PaymentMethod } from './PaymentMethod';
+import { PaymentMethod } from './PaymentMethod';
 import { ShippingOptions, ShippingRates } from './ShippingOptions';
 
 export interface Order {
     orderItems: Array<OrderItem>;
     contactInfo: ContactInfo;
-    shippingAddress?: Address;
+    shippingAddress: Address;
     shippingOptions: ShippingOptions;
     paymentMethod: PaymentMethod;
-    creditCard?: CreditCard;
-    bankAccount?: BankAccount;
 }
 
 export const Order = {

@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react';
-import { Order, PaymentMethodNames, ShippingMethodNames } from '../../models';
+import { StringUtils } from '@react-force/utils';
+import { Order, PaymentTypeNames, ShippingMethodNames } from '../../models';
+
+const { isBlank } = StringUtils;
 
 export interface OrderDetailProps {
     order: Order;
@@ -20,12 +23,18 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
                 <h6 className="mb-0">Contact Information</h6>
                 <p>Email: {contactInfo.email}</p>
 
-                {shippingAddress !== undefined ? (
+                {!isBlank(shippingAddress.firstName) ? (
                     <Fragment>
                         <h6 className="mb-0">Shipping Address</h6>
                         <p>
                             {shippingAddress.firstName}{' '}
                             {shippingAddress.lastName}
+                            {!isBlank(shippingAddress.company) ? (
+                                <Fragment>
+                                    <br />
+                                    {shippingAddress.company}
+                                </Fragment>
+                            ) : null}
                             <br />
                             {shippingAddress.address}
                             <br />
@@ -45,9 +54,32 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
 
                 <h6 className="mb-0">Payment Method</h6>
                 <p>
-                    {PaymentMethodNames[paymentMethod]}
+                    {PaymentTypeNames[paymentMethod.type]}
                     <br />
-                    Payment Details
+                    {paymentMethod.type === 'creditCard' &&
+                    !isBlank(paymentMethod.nameOnCard) ? (
+                        <Fragment>
+                            {paymentMethod.nameOnCard}
+                            <br />
+                            Card number: {paymentMethod.cardNumber}
+                            <br />
+                            Expiration: {paymentMethod.expiration}
+                            <br />
+                            CVV: {paymentMethod.cvv}
+                        </Fragment>
+                    ) : null}
+                    {paymentMethod.type === 'bankAccount' &&
+                    !isBlank(paymentMethod.accountHolderName) ? (
+                        <Fragment>
+                            {paymentMethod.accountHolderName}
+                            <br />
+                            {paymentMethod.bankName}
+                            <br />
+                            Routing number: {paymentMethod.routingNumber}
+                            <br />
+                            Account number: {paymentMethod.accountNumber}
+                        </Fragment>
+                    ) : null}
                 </p>
             </div>
         </Fragment>

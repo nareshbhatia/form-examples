@@ -28,11 +28,26 @@ export const order: Order = {
         },
     ],
     contactInfo: {
-        email: 'michael.jackson@gmail.com',
+        email: 'emusk@teslamotors.com',
+    },
+    shippingAddress: {
+        firstName: 'Elon',
+        lastName: 'Musk',
+        company: 'Tesla, Inc.',
+        address: ' 3500 Deer Creek Road',
+        city: 'Palo Alto',
+        state: 'CA',
+        zip: '94304',
     },
     shippingOptions: {
         shippingMethod: 'ground',
         giftWrapping: false,
     },
-    paymentMethod: 'creditCard',
+    paymentMethod: {
+        type: 'creditCard',
+        nameOnCard: '',
+        cardNumber: '',
+        expiration: '',
+        cvv: 0,
+    },
 };

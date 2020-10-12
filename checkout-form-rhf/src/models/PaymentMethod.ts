@@ -1,20 +1,25 @@
-export interface CreditCard {
-    nameOnCard: string;
-    cardNumber: string;
-    expiration: string;
-    CVV: number;
-}
+export type PaymentType = 'creditCard' | 'bankAccount';
 
-export interface BankAccount {
-    nameOnCard: string;
-    cardNumber: string;
-    expiration: string;
-    CVV: number;
-}
-
-export type PaymentMethod = 'creditCard' | 'bankAccount';
-
-export const PaymentMethodNames: { [key in PaymentMethod]: string } = {
+export const PaymentTypeNames: { [key in PaymentType]: string } = {
     creditCard: 'Credit Card',
     bankAccount: 'Bank Account',
 };
+
+export interface CreditCardPayment {
+    type: 'creditCard';
+    nameOnCard: string;
+    cardNumber: string;
+    expiration: string;
+    cvv: number;
+}
+
+export interface BankAccountPayment {
+    type: 'bankAccount';
+    accountHolderName: string;
+    bankName: string;
+    routingNumber: string;
+    accountNumber: string;
+}
+
+/** TypeScript discriminating union */
+export type PaymentMethod = CreditCardPayment | BankAccountPayment;

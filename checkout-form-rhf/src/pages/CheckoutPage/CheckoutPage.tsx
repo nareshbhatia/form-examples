@@ -13,6 +13,7 @@ export const CheckoutPage = () => {
      * so it must be merged with existing order.
      */
     const handleSubmit = (changedOrder: Order) => {
+        console.log(JSON.stringify(changedOrder, null, 2));
         setOrder({
             ...order,
             ...changedOrder,
