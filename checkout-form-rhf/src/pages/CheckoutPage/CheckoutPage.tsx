@@ -1,5 +1,5 @@
 import React from 'react';
-import { OrderSummary } from '../../components';
+import { OrderDetail, OrderSummary } from '../../components';
 import { useOrder, useOrderSetter } from '../../contexts';
 import { Order, ShippingMethod } from '../../models';
 import { CheckoutForm } from './CheckoutForm';
@@ -13,7 +13,6 @@ export const CheckoutPage = () => {
      * so it must be merged with existing order.
      */
     const handleSubmit = (changedOrder: Order) => {
-        console.log(changedOrder);
         setOrder({
             ...order,
             ...changedOrder,
@@ -34,6 +33,9 @@ export const CheckoutPage = () => {
         <div className="row">
             <div className="col-md-4 order-md-2 mb-4">
                 <OrderSummary order={order} />
+                <div className="mt-5">
+                    <OrderDetail order={order} />
+                </div>
             </div>
             <div className="col-md-8 order-md-1">
                 <CheckoutForm
