@@ -96,7 +96,10 @@ export const CheckoutForm = ({
                 <ContactInfoForm />
                 <hr className="mt-4 mb3" />
 
-                <AddressForm />
+                <AddressForm
+                    title="Shipping Address"
+                    parentName="shippingAddress"
+                />
                 <hr className="mt-4 mb3" />
 
                 <ShippingOptionsForm

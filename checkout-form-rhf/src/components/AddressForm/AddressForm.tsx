@@ -2,29 +2,36 @@ import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { TextField } from '../Form';
 
-export const AddressForm = () => {
+export interface AddressFormProps {
+    title?: string;
+
+    /** parent name e.g. "shippingAddress" */
+    parentName: string;
+}
+
+export const AddressForm = ({ title, parentName }: AddressFormProps) => {
     const { errors, register } = useFormContext();
 
     return (
         <Fragment>
-            <h5 className="mb-3">Shipping Address</h5>
+            {title !== undefined ? <h5 className="mb-3">{title}</h5> : null}
             <div className="row">
                 <div className="col-md-6 mb-3">
                     <TextField
                         id="firstName"
-                        name="shippingAddress.firstName"
+                        name={`${parentName}.firstName`}
                         label="First name"
                         ref={register}
-                        error={errors.shippingAddress?.firstName?.message}
+                        error={errors[parentName]?.firstName?.message}
                     />
                 </div>
                 <div className="col-md-6 mb-3">
                     <TextField
                         id="lastName"
-                        name="shippingAddress.lastName"
+                        name={`${parentName}.lastName`}
                         label="Last name"
                         ref={register}
-                        error={errors.shippingAddress?.lastName?.message}
+                        error={errors[parentName]?.lastName?.message}
                     />
                 </div>
             </div>
@@ -32,20 +39,20 @@ export const AddressForm = () => {
             <div className="mb-3">
                 <TextField
                     id="company"
-                    name="shippingAddress.company"
+                    name={`${parentName}.company`}
                     label="Company (optional)"
                     ref={register}
-                    error={errors.shippingAddress?.company?.message}
+                    error={errors[parentName]?.company?.message}
                 />
             </div>
 
             <div className="mb-3">
                 <TextField
                     id="address"
-                    name="shippingAddress.address"
+                    name={`${parentName}.address`}
                     label="Address"
                     ref={register}
-                    error={errors.shippingAddress?.address?.message}
+                    error={errors[parentName]?.address?.message}
                 />
             </div>
 
@@ -53,28 +60,28 @@ export const AddressForm = () => {
                 <div className="col-md-5 mb-3">
                     <TextField
                         id="city"
-                        name="shippingAddress.city"
+                        name={`${parentName}.city`}
                         label="City"
                         ref={register}
-                        error={errors.shippingAddress?.city?.message}
+                        error={errors[parentName]?.city?.message}
                     />
                 </div>
                 <div className="col-md-4 mb-3">
                     <TextField
                         id="state"
-                        name="shippingAddress.state"
+                        name={`${parentName}.state`}
                         label="State"
                         ref={register}
-                        error={errors.shippingAddress?.state?.message}
+                        error={errors[parentName]?.state?.message}
                     />
                 </div>
                 <div className="col-md-3 mb-3">
                     <TextField
                         id="zip"
-                        name="shippingAddress.zip"
+                        name={`${parentName}.zip`}
                         label="Zip"
                         ref={register}
-                        error={errors.shippingAddress?.zip?.message}
+                        error={errors[parentName]?.zip?.message}
                     />
                 </div>
             </div>
