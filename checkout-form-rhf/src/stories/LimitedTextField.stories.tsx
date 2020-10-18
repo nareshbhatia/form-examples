@@ -7,11 +7,14 @@ export default {
     component: LimitedTextField,
 } as Meta;
 
-const Template: Story<LimitedTextFieldProps> = (args) => (
-    <LimitedTextField {...args} />
-);
+export const LimitedTextFieldStory = () => <LimitedTextField maxCount={10} />;
 
-export const LimitedTextFieldStory = Template.bind({});
-LimitedTextFieldStory.args = {
-    maxCount: 30,
-};
+// ----- NOTE: Template syntax below does not work -----
+// const Template: Story<LimitedTextFieldProps> = (args) => (
+//     <LimitedTextField {...args} />
+// );
+//
+// export const LimitedTextFieldStory = Template.bind({});
+// LimitedTextFieldStory.args = {
+//     maxCount: 30,
+// };
