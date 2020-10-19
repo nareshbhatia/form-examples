@@ -1,7 +1,15 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import * as yup from 'yup';
 import { ShippingMethod } from '../../models';
 import { Checkbox, Radio } from '../Form';
+
+export const shippingOptionsSchema = yup.object().shape({
+    shippingMethod: yup
+        .string()
+        .required('Shipping method is a required field'),
+    giftWrapping: yup.boolean().required('Gift wrapping is a required field'),
+});
 
 export interface ShippingOptionsFormProps {
     onShippingMethodChanged: (shippingMethod: ShippingMethod) => void;

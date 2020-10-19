@@ -1,8 +1,20 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BankAccountForm } from './BankAccountForm';
-import { CreditCardForm } from './CreditCardForm';
+import * as yup from 'yup';
+import { PaymentMethod } from '../../models';
 import { Radio } from '../Form';
+import { BankAccountForm, bankAccountSchema } from './BankAccountForm';
+import { CreditCardForm, creditCardSchema } from './CreditCardForm';
+
+export const paymentSchema = yup.lazy((value) => {
+    if (value === undefined) {
+        return yup.mixed().notRequired();
+    }
+    const paymentMethod = value as PaymentMethod;
+    return paymentMethod.type === 'creditCard'
+        ? creditCardSchema
+        : bankAccountSchema;
+});
 
 export const PaymentForm = () => {
     const { errors, register, watch } = useFormContext();

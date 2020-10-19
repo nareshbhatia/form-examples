@@ -1,6 +1,14 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import * as yup from 'yup';
 import { TextField } from '../Form';
+
+export const contactInfoSchema = yup.object().shape({
+    email: yup
+        .string()
+        .email('Email must be a valid email')
+        .required('Email is a required field'),
+});
 
 export const ContactInfoForm = () => {
     const { errors, register } = useFormContext();

@@ -1,6 +1,17 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import * as yup from 'yup';
 import { TextField } from '../Form';
+
+export const addressSchema = yup.object().shape({
+    firstName: yup.string().required('First name is a required field').min(2),
+    lastName: yup.string().required('Last name is a required field').min(2),
+    company: yup.string(),
+    address: yup.string().required('Address is a required field'),
+    city: yup.string().required('City is a required field'),
+    state: yup.string().required('State is a required field'),
+    zip: yup.string().required('Zip is a required field'),
+});
 
 export interface AddressFormProps {
     title?: string;

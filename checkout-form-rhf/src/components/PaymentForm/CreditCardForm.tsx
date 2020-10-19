@@ -1,6 +1,14 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import * as yup from 'yup';
 import { TextField } from '../Form';
+
+export const creditCardSchema = yup.object().shape({
+    nameOnCard: yup.string().required('Name is a required field'),
+    cardNumber: yup.string().required('Card number is a required field'),
+    expiration: yup.string().required('Expiration is a required field'),
+    cvv: yup.number().required('CVV is a required field'),
+});
 
 export const CreditCardForm = () => {
     const { errors, register } = useFormContext();
