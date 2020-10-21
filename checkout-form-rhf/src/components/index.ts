@@ -1,4 +1,5 @@
 export * from './AddressForm';
+export * from './AddressView';
 export * from './ContactInfoForm';
 export * from './Form';
 export * from './Header';

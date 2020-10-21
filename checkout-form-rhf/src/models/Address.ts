@@ -7,3 +7,13 @@ export interface Address {
     state: string;
     zip: string;
 }
+
+export const newAddress = (): Address => ({
+    firstName: '',
+    lastName: '',
+    company: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+});

@@ -1,3 +1,4 @@
+export * from './Address';
 export * from './ContactInfo';
 export * from './Item';
 export * from './Order';

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { StringUtils } from '@react-force/utils';
 import { Order, PaymentTypeNames, ShippingMethodNames } from '../../models';
+import { AddressView } from '../AddressView';
 
 const { isBlank } = StringUtils;
 
@@ -24,24 +25,10 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
                 <p>Email: {contactInfo.email}</p>
 
                 {!isBlank(shippingAddress.firstName) ? (
-                    <Fragment>
-                        <h6 className="mb-0">Shipping Address</h6>
-                        <p>
-                            {shippingAddress.firstName}{' '}
-                            {shippingAddress.lastName}
-                            {!isBlank(shippingAddress.company) ? (
-                                <Fragment>
-                                    <br />
-                                    {shippingAddress.company}
-                                </Fragment>
-                            ) : null}
-                            <br />
-                            {shippingAddress.address}
-                            <br />
-                            {shippingAddress.city}, {shippingAddress.state}{' '}
-                            {shippingAddress.zip}
-                        </p>
-                    </Fragment>
+                    <AddressView
+                        label="Shipping Address"
+                        address={shippingAddress}
+                    />
                 ) : null}
 
                 <h6 className="mb-0">Shipping Options</h6>
