@@ -1,6 +1,6 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { LimitedTextField, LimitedTextFieldProps } from '../components';
+import { Meta } from '@storybook/react/types-6-0';
+import { LimitedTextField } from '../components';
 
 export default {
     title: 'LimitedTextField',
@@ -8,6 +8,7 @@ export default {
 } as Meta;
 
 export const LimitedTextFieldStory = () => <LimitedTextField maxCount={10} />;
+LimitedTextFieldStory.storyName = 'LimitedTextField';
 
 // ----- NOTE: Template syntax below does not work -----
 // const Template: Story<LimitedTextFieldProps> = (args) => (
@@ -18,3 +19,4 @@ export const LimitedTextFieldStory = () => <LimitedTextField maxCount={10} />;
 // LimitedTextFieldStory.args = {
 //     maxCount: 30,
 // };
+// LimitedTextFieldStory.storyName = 'LimitedTextField';

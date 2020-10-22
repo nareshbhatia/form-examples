@@ -21,7 +21,7 @@ export default {
 } as Meta;
 
 // -----------------------------
-// Single Address Form
+// Single Address Story
 // -----------------------------
 interface Company {
     address: Address;
@@ -31,26 +31,27 @@ const companySchema = yup.object().shape({
     address: addressSchema,
 });
 
-const CompanyForm = () => {
+export const SingleAddressStory = () => {
     const [company, setCompany] = useState<Company>({
         address: newAddress(),
     });
+    const { address } = company;
+
     const methods = useForm<Company>({
         mode: 'onBlur',
         defaultValues: company,
         resolver: yupResolver(companySchema),
     });
+    const { handleSubmit } = methods;
 
     const onSubmit = (changedCompany: Company) => {
         setCompany(changedCompany);
     };
 
-    const { address } = company;
-
     return (
         <Fragment>
             <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <AddressForm title="Address" parentName="address" />
 
                     <div className="mt-2">
@@ -69,11 +70,10 @@ const CompanyForm = () => {
         </Fragment>
     );
 };
-
-export const SingleAddress = () => <CompanyForm />;
+SingleAddressStory.storyName = 'Single Address';
 
 // -----------------------------
-// Multiple Address Form
+// Multiple Address Story
 // -----------------------------
 interface Order {
     isShippingAddressSameAsBilling: boolean;
@@ -92,24 +92,25 @@ const orderSchema = yup.lazy((value) => {
     });
 });
 
-const CheckoutForm = () => {
+export const MultipleAddressStory = () => {
     const [order, setOrder] = useState<Order>({
         isShippingAddressSameAsBilling: false,
         billingAddress: InitialBillingAddress,
         shippingAddress: newAddress(),
     });
+    const { billingAddress, shippingAddress } = order;
+
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,
         resolver: yupResolver(orderSchema),
     });
+    const { errors, handleSubmit, register } = methods;
 
     const { watch } = methods;
     const isShippingAddressSameAsBilling = watch(
         'isShippingAddressSameAsBilling'
     );
-
-    const { billingAddress, shippingAddress } = order;
 
     const onSubmit = (changedOrder: Order) => {
         setOrder(changedOrder);
@@ -118,7 +119,7 @@ const CheckoutForm = () => {
     return (
         <Fragment>
             <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <AddressForm
                         title="Billing Address"
                         parentName="billingAddress"
@@ -130,10 +131,9 @@ const CheckoutForm = () => {
                             id="isShippingAddressSameAsBilling"
                             name="isShippingAddressSameAsBilling"
                             label="Same as billing address"
-                            ref={methods.register}
+                            ref={register}
                             error={
-                                methods.errors.isShippingAddressSameAsBilling
-                                    ?.message
+                                errors.isShippingAddressSameAsBilling?.message
                             }
                         />
                     </div>
@@ -143,7 +143,7 @@ const CheckoutForm = () => {
 
                     <div className="mt-2">
                         <button className="btn btn-primary" type="submit">
-                            Place your order
+                            Submit
                         </button>
                     </div>
                 </form>
@@ -172,5 +172,4 @@ const CheckoutForm = () => {
         </Fragment>
     );
 };
-
-export const MultipleAddresses = () => <CheckoutForm />;
+MultipleAddressStory.storyName = 'Multiple Address';
