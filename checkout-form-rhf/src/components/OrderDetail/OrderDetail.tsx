@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { StringUtils } from '@react-force/utils';
-import { Order, PaymentTypeNames, ShippingMethodNames } from '../../models';
+import { Order, ShippingMethodNames } from '../../models';
 import { AddressView } from '../AddressView';
+import { PaymentView } from '../PaymentView';
 
 const { isBlank } = StringUtils;
 
@@ -39,35 +40,7 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
                     Gift wrapping: {shippingOptions.giftWrapping ? 'Yes' : 'No'}
                 </p>
 
-                <h6 className="mb-0">Payment Method</h6>
-                <p>
-                    {PaymentTypeNames[paymentMethod.type]}
-                    <br />
-                    {paymentMethod.type === 'creditCard' &&
-                    !isBlank(paymentMethod.nameOnCard) ? (
-                        <Fragment>
-                            {paymentMethod.nameOnCard}
-                            <br />
-                            Card number: {paymentMethod.cardNumber}
-                            <br />
-                            Expiration: {paymentMethod.expiration}
-                            <br />
-                            CVV: {paymentMethod.cvv}
-                        </Fragment>
-                    ) : null}
-                    {paymentMethod.type === 'bankAccount' &&
-                    !isBlank(paymentMethod.accountHolderName) ? (
-                        <Fragment>
-                            {paymentMethod.accountHolderName}
-                            <br />
-                            {paymentMethod.bankName}
-                            <br />
-                            Routing number: {paymentMethod.routingNumber}
-                            <br />
-                            Account number: {paymentMethod.accountNumber}
-                        </Fragment>
-                    ) : null}
-                </p>
+                <PaymentView paymentMethod={paymentMethod} />
             </div>
         </Fragment>
     );

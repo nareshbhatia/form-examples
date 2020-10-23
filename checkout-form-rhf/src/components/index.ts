@@ -6,4 +6,5 @@ export * from './Header';
 export * from './OrderDetail';
 export * from './OrderSummary';
 export * from './PaymentForm';
+export * from './PaymentView';
 export * from './ShippingOptionsForm';

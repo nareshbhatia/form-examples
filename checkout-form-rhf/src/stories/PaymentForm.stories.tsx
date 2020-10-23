@@ -3,29 +3,33 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { ContactInfoForm, contactInfoSchema } from '../components';
-import { ContactInfo } from '../models';
+import { PaymentForm, paymentSchema, PaymentView } from '../components';
+import { PaymentMethod } from '../models';
 
 export default {
-    title: 'ContactInfoForm',
-    component: ContactInfoForm,
+    title: 'PaymentForm',
+    component: PaymentForm,
 } as Meta;
 
 interface Order {
-    contactInfo: ContactInfo;
+    paymentMethod: PaymentMethod;
 }
 
 const orderSchema = yup.object().shape({
-    contactInfo: contactInfoSchema,
+    paymentMethod: paymentSchema,
 });
 
-export const ContactInfoFormStory = () => {
+export const PaymentFormStory = () => {
     const [order, setOrder] = useState<Order>({
-        contactInfo: {
-            email: '',
+        paymentMethod: {
+            type: 'creditCard',
+            nameOnCard: '',
+            cardNumber: '',
+            expiration: '',
+            cvv: 0,
         },
     });
-    const { contactInfo } = order;
+    const { paymentMethod } = order;
 
     const methods = useForm<Order>({
         mode: 'onBlur',
@@ -42,7 +46,7 @@ export const ContactInfoFormStory = () => {
         <Fragment>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <ContactInfoForm />
+                    <PaymentForm />
 
                     <div className="mt-2">
                         <button className="btn btn-primary" type="submit">
@@ -53,9 +57,9 @@ export const ContactInfoFormStory = () => {
             </FormProvider>
             <div className="mt-4">
                 <h5 className="mb-2">Form Values</h5>
-                <p>{contactInfo.email}</p>
+                <PaymentView paymentMethod={paymentMethod} />
             </div>
         </Fragment>
     );
 };
-ContactInfoFormStory.storyName = 'ContactInfoForm';
+PaymentFormStory.storyName = 'PaymentForm';

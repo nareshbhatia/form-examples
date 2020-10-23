@@ -61,8 +61,8 @@ export const SingleAddressStory = () => {
                     </div>
                 </form>
             </FormProvider>
-            <div className="mt-3">
-                <h5 className="mb-3">Form Values</h5>
+            <div className="mt-4">
+                <h5 className="mb-2">Form Values</h5>
                 {!isBlank(address.firstName) ? (
                     <AddressView address={address} />
                 ) : null}
@@ -148,8 +148,8 @@ export const MultipleAddressStory = () => {
                     </div>
                 </form>
             </FormProvider>
-            <div className="mt-3">
-                <h5 className="mb-3">Form Values</h5>
+            <div className="mt-4">
+                <h5 className="mb-2">Form Values</h5>
                 <div className="row">
                     <div className="col-6">
                         {!isBlank(billingAddress.firstName) ? (

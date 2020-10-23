@@ -3,29 +3,30 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { ContactInfoForm, contactInfoSchema } from '../components';
-import { ContactInfo } from '../models';
+import { ShippingOptionsForm, shippingOptionsSchema } from '../components';
+import { ShippingMethodNames, ShippingOptions } from '../models';
 
 export default {
-    title: 'ContactInfoForm',
-    component: ContactInfoForm,
+    title: 'ShippingOptionsForm',
+    component: ShippingOptionsForm,
 } as Meta;
 
 interface Order {
-    contactInfo: ContactInfo;
+    shippingOptions: ShippingOptions;
 }
 
 const orderSchema = yup.object().shape({
-    contactInfo: contactInfoSchema,
+    shippingOptions: shippingOptionsSchema,
 });
 
-export const ContactInfoFormStory = () => {
+export const ShippingOptionsFormStory = () => {
     const [order, setOrder] = useState<Order>({
-        contactInfo: {
-            email: '',
+        shippingOptions: {
+            shippingMethod: 'ground',
+            giftWrapping: false,
         },
     });
-    const { contactInfo } = order;
+    const { shippingOptions } = order;
 
     const methods = useForm<Order>({
         mode: 'onBlur',
@@ -42,9 +43,9 @@ export const ContactInfoFormStory = () => {
         <Fragment>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <ContactInfoForm />
+                    <ShippingOptionsForm onShippingMethodChanged={() => {}} />
 
-                    <div className="mt-2">
+                    <div className="mt-3">
                         <button className="btn btn-primary" type="submit">
                             Submit
                         </button>
@@ -53,9 +54,14 @@ export const ContactInfoFormStory = () => {
             </FormProvider>
             <div className="mt-4">
                 <h5 className="mb-2">Form Values</h5>
-                <p>{contactInfo.email}</p>
+                <p>
+                    Shipping method:{' '}
+                    {ShippingMethodNames[shippingOptions.shippingMethod]}
+                    <br />
+                    Gift wrapping: {shippingOptions.giftWrapping ? 'Yes' : 'No'}
+                </p>
             </div>
         </Fragment>
     );
 };
-ContactInfoFormStory.storyName = 'ContactInfoForm';
+ShippingOptionsFormStory.storyName = 'ShippingOptionsForm';
