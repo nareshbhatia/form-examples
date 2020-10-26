@@ -1,0 +1,18 @@
+body {
+    /* add top padding to make room for the header */
+    padding-top: 4.5rem;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.error-text {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: var(--danger);
+}
+
+
+/*# sourceMappingURL=main.ebe118d3.chunk.css.map*/
