@@ -12,6 +12,7 @@ export interface Order {
     paymentMethod: PaymentMethod;
 }
 
+/* eslint-disable @typescript-eslint/no-redeclare */
 export const Order = {
     getOrderItemsTotal: (order: Order) => {
         return order.orderItems.reduce((total, orderItem) => {
