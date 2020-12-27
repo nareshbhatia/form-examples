@@ -1,16 +1,17 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
 export const addressSchema = yup.object().shape({
-    firstName: yup.string().required('First name is a required field').min(2),
-    lastName: yup.string().required('Last name is a required field').min(2),
+    firstName: yup.string().required().min(2),
+    lastName: yup.string().required().min(2),
     company: yup.string(),
-    address: yup.string().required('Address is a required field'),
-    city: yup.string().required('City is a required field'),
-    state: yup.string().required('State is a required field'),
-    zip: yup.string().required('Zip is a required field'),
+    address: yup.string().required(),
+    city: yup.string().required(),
+    state: yup.string().required(),
+    zip: yup.string().required(),
 });
 
 export interface AddressFormProps {
@@ -21,6 +22,7 @@ export interface AddressFormProps {
 }
 
 export const AddressForm = ({ title, parentName }: AddressFormProps) => {
+    const { t } = useTranslation();
     const { errors, register } = useFormContext();
 
     return (
@@ -31,7 +33,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                     <TextField
                         id="firstName"
                         name={`${parentName}.firstName`}
-                        label="First name"
+                        label={t('text.firstName')}
                         ref={register}
                         error={errors[parentName]?.firstName?.message}
                     />
@@ -40,7 +42,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                     <TextField
                         id="lastName"
                         name={`${parentName}.lastName`}
-                        label="Last name"
+                        label={t('text.lastName')}
                         ref={register}
                         error={errors[parentName]?.lastName?.message}
                     />
@@ -51,7 +53,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                 <TextField
                     id="company"
                     name={`${parentName}.company`}
-                    label="Company (optional)"
+                    label={t('text.companyOptional')}
                     ref={register}
                     error={errors[parentName]?.company?.message}
                 />
@@ -61,7 +63,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                 <TextField
                     id="address"
                     name={`${parentName}.address`}
-                    label="Address"
+                    label={t('text.address')}
                     ref={register}
                     error={errors[parentName]?.address?.message}
                 />
@@ -72,7 +74,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                     <TextField
                         id="city"
                         name={`${parentName}.city`}
-                        label="City"
+                        label={t('text.city')}
                         ref={register}
                         error={errors[parentName]?.city?.message}
                     />
@@ -81,7 +83,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                     <TextField
                         id="state"
                         name={`${parentName}.state`}
-                        label="State"
+                        label={t('text.state')}
                         ref={register}
                         error={errors[parentName]?.state?.message}
                     />
@@ -90,7 +92,7 @@ export const AddressForm = ({ title, parentName }: AddressFormProps) => {
                     <TextField
                         id="zip"
                         name={`${parentName}.zip`}
-                        label="Zip"
+                        label={t('text.zip')}
                         ref={register}
                         error={errors[parentName]?.zip?.message}
                     />

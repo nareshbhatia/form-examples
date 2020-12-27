@@ -1,10 +1,5 @@
 export type PaymentType = 'creditCard' | 'bankAccount';
 
-export const PaymentTypeNames: { [key in PaymentType]: string } = {
-    creditCard: 'Credit Card',
-    bankAccount: 'Bank Account',
-};
-
 export interface CreditCardPayment {
     type: 'creditCard';
     nameOnCard: string;

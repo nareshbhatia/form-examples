@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { ShippingMethod } from '../../models';
 import { Checkbox, Radio } from '../Form';
@@ -18,6 +19,7 @@ export interface ShippingOptionsFormProps {
 export const ShippingOptionsForm = ({
     onShippingMethodChanged,
 }: ShippingOptionsFormProps) => {
+    const { t } = useTranslation();
     const { errors, register } = useFormContext();
 
     const handleShippingMethodChanged = (
@@ -28,13 +30,13 @@ export const ShippingOptionsForm = ({
 
     return (
         <Fragment>
-            <h5 className="mb-3">Shipping Options</h5>
+            <h5 className="mb-3">{t('text.shippingOptions')}</h5>
             <div className="d-block my-3">
                 <Radio
                     id="ground"
                     value="ground"
                     name="shippingOptions.shippingMethod"
-                    label="Ground (3-5 days)"
+                    label={t('text.groundLong')}
                     ref={register}
                     error={errors.shippingOptions?.shippingMethod?.message}
                     onChange={handleShippingMethodChanged}
@@ -43,7 +45,7 @@ export const ShippingOptionsForm = ({
                     id="secondDay"
                     value="secondDay"
                     name="shippingOptions.shippingMethod"
-                    label="Second Day"
+                    label={t('text.secondDay')}
                     ref={register}
                     error={errors.shippingOptions?.shippingMethod?.message}
                     onChange={handleShippingMethodChanged}
@@ -52,7 +54,7 @@ export const ShippingOptionsForm = ({
                     id="overnight"
                     value="overnight"
                     name="shippingOptions.shippingMethod"
-                    label="Overnight"
+                    label={t('text.overnight')}
                     ref={register}
                     error={errors.shippingOptions?.shippingMethod?.message}
                     onChange={handleShippingMethodChanged}
@@ -61,7 +63,7 @@ export const ShippingOptionsForm = ({
             <Checkbox
                 id="giftWrapping"
                 name="shippingOptions.giftWrapping"
-                label="Gift wrapping"
+                label={t('text.giftWrapping')}
                 ref={register}
                 error={errors.shippingOptions?.giftWrapping?.message}
             />

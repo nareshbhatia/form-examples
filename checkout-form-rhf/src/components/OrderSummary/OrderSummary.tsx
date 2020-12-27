@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { NumberUtils } from '@react-force/number-utils';
+import { useTranslation } from 'react-i18next';
 import { Order, OrderItem } from '../../models';
 
 export interface OrderSummaryProps {
@@ -7,6 +8,7 @@ export interface OrderSummaryProps {
 }
 
 export const OrderSummary = ({ order }: OrderSummaryProps) => {
+    const { t } = useTranslation();
     const { orderItems } = order;
     const {
         orderItemsTotal,
@@ -20,7 +22,7 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
     return (
         <Fragment>
             <h4 className="d-flex justify-content-between align-items-center mb-3">
-                <span className="text-muted">Order Summary</span>
+                <span className="text-muted">{t('text.orderSummary')}</span>
                 <span className="badge badge-secondary badge-pill">
                     {orderItems.length}
                 </span>
@@ -34,7 +36,7 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
                         <div>
                             <h6 className="my-0">{orderItem.item.name}</h6>
                             <small className="text-muted">
-                                Quantity: {orderItem.qty}
+                                {t('text.quantity')}: {orderItem.qty}
                             </small>
                         </div>
                         <span className="text-muted">
@@ -47,16 +49,16 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
                 ))}
                 <li className="list-group-item">
                     <div className="d-flex justify-content-between">
-                        <span>Items</span>
+                        <span>{t('text.items')}</span>
                         <strong>${orderItemsTotalStr}</strong>
                     </div>
                     <div className="d-flex justify-content-between">
-                        <span>Shipping & handling</span>
+                        <span>{t('text.shippingHandling')}</span>
                         <strong>${shippingChargesStr}</strong>
                     </div>
                 </li>
                 <li className="list-group-item d-flex justify-content-between text-primary">
-                    <span>Order total</span>
+                    <span>{t('text.orderTotal')}</span>
                     <strong>${orderTotalStr}</strong>
                 </li>
             </ul>

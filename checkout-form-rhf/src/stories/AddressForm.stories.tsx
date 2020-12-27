@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { StringUtils } from '@react-force/utils';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import {
     AddressForm,
@@ -93,6 +94,7 @@ const orderSchema = yup.lazy((value) => {
 });
 
 export const MultipleAddressStory = () => {
+    const { t } = useTranslation();
     const [order, setOrder] = useState<Order>({
         isShippingAddressSameAsBilling: false,
         billingAddress: InitialBillingAddress,
@@ -125,7 +127,7 @@ export const MultipleAddressStory = () => {
                         parentName="billingAddress"
                     />
 
-                    <h5 className="mt-3 mb-2">Shipping Address</h5>
+                    <h5 className="mt-3 mb-2">{t('text.shippingAddress')}</h5>
                     <div className="mb-3">
                         <Checkbox
                             id="isShippingAddressSameAsBilling"
@@ -154,7 +156,7 @@ export const MultipleAddressStory = () => {
                     <div className="col-6">
                         {!isBlank(billingAddress.firstName) ? (
                             <AddressView
-                                label="Billing Address"
+                                label={t('text.billingAddress')}
                                 address={billingAddress}
                             />
                         ) : null}
@@ -162,7 +164,7 @@ export const MultipleAddressStory = () => {
                     <div className="col-6">
                         {!isBlank(shippingAddress?.firstName) ? (
                             <AddressView
-                                label="Shipping Address"
+                                label={t('text.shippingAddress')}
                                 address={shippingAddress}
                             />
                         ) : null}

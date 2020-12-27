@@ -3,6 +3,7 @@ export * from './AddressView';
 export * from './ContactInfoForm';
 export * from './Form';
 export * from './Header';
+export * from './Loading';
 export * from './OrderDetail';
 export * from './OrderSummary';
 export * from './PaymentForm';

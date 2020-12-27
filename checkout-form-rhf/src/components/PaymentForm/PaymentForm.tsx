@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { PaymentMethod } from '../../models';
 import { Radio } from '../Form';
@@ -17,18 +18,19 @@ export const paymentSchema = yup.lazy((value) => {
 });
 
 export const PaymentForm = () => {
+    const { t } = useTranslation();
     const { errors, register, watch } = useFormContext();
 
     const paymentType = watch('paymentMethod.type');
 
     return (
         <Fragment>
-            <h5 className="mb-3">Payment Method</h5>
+            <h5 className="mb-3">{t('text.paymentMethod')}</h5>
             <Radio
                 id="creditCard"
                 value="creditCard"
                 name="paymentMethod.type"
-                label="Credit Card"
+                label={t('text.creditCard')}
                 ref={register}
                 error={errors.paymentMethod?.type?.message}
             />
@@ -36,7 +38,7 @@ export const PaymentForm = () => {
                 id="bankAccount"
                 value="bankAccount"
                 name="paymentMethod.type"
-                label="Bank Account"
+                label={t('text.bankAccount')}
                 ref={register}
                 error={errors.paymentMethod?.type?.message}
             />

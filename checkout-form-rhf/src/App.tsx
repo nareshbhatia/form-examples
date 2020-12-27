@@ -1,15 +1,17 @@
-import React from 'react';
-import { Header } from './components';
+import React, { Suspense } from 'react';
+import { Header, Loading } from './components';
 import { OrderContextProvider } from './contexts';
 import { CheckoutPage } from './pages';
 
 export const App = () => {
     return (
-        <OrderContextProvider>
-            <Header />
-            <main role="main" className="container">
-                <CheckoutPage />
-            </main>
-        </OrderContextProvider>
+        <Suspense fallback={<Loading />}>
+            <OrderContextProvider>
+                <Header />
+                <main role="main" className="container">
+                    <CheckoutPage />
+                </main>
+            </OrderContextProvider>
+        </Suspense>
     );
 };

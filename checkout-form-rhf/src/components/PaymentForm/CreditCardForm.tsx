@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
@@ -11,6 +12,7 @@ export const creditCardSchema = yup.object().shape({
 });
 
 export const CreditCardForm = () => {
+    const { t } = useTranslation();
     const { errors, register } = useFormContext();
 
     return (
@@ -20,7 +22,7 @@ export const CreditCardForm = () => {
                     <TextField
                         id="nameOnCard"
                         name="paymentMethod.nameOnCard"
-                        label="Name on card"
+                        label={t('text.nameOnCard')}
                         ref={register}
                         error={errors.paymentMethod?.nameOnCard?.message}
                     />
@@ -29,7 +31,7 @@ export const CreditCardForm = () => {
                     <TextField
                         id="cardNumber"
                         name="paymentMethod.cardNumber"
-                        label="Credit card number"
+                        label={t('text.creditCardNumber')}
                         ref={register}
                         error={errors.paymentMethod?.cardNumber?.message}
                     />
@@ -40,7 +42,7 @@ export const CreditCardForm = () => {
                     <TextField
                         id="expiration"
                         name="paymentMethod.expiration"
-                        label="Expiration"
+                        label={t('text.expiration')}
                         ref={register}
                         error={errors.paymentMethod?.expiration?.message}
                     />
@@ -49,7 +51,7 @@ export const CreditCardForm = () => {
                     <TextField
                         id="cvv"
                         name="paymentMethod.cvv"
-                        label="CVV"
+                        label={t('text.cvv')}
                         ref={register}
                         error={errors.paymentMethod?.cvv?.message}
                     />

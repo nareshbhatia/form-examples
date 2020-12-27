@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { StringUtils } from '@react-force/utils';
-import { PaymentMethod, PaymentTypeNames } from '../../models';
+import { useTranslation } from 'react-i18next';
+import { PaymentMethod } from '../../models';
+import { PaymentTypeText } from './PaymentTypeText';
 
 const { isBlank } = StringUtils;
 
@@ -9,22 +11,24 @@ export interface PaymentViewProps {
 }
 
 export const PaymentView = ({ paymentMethod }: PaymentViewProps) => {
+    const { t } = useTranslation();
+
     return (
         <Fragment>
-            <h6 className="mb-0">Payment Method</h6>
+            <h6 className="mb-0">{t('text.paymentMethod')}</h6>
             <p>
-                {PaymentTypeNames[paymentMethod.type]}
+                <PaymentTypeText paymentType={paymentMethod.type} />
                 <br />
                 {paymentMethod.type === 'creditCard' &&
                 !isBlank(paymentMethod.nameOnCard) ? (
                     <Fragment>
                         {paymentMethod.nameOnCard}
                         <br />
-                        Card number: {paymentMethod.cardNumber}
+                        {t('text.cardNumber')}: {paymentMethod.cardNumber}
                         <br />
-                        Expiration: {paymentMethod.expiration}
+                        {t('text.expiration')}: {paymentMethod.expiration}
                         <br />
-                        CVV: {paymentMethod.cvv}
+                        {t('text.cvv')}: {paymentMethod.cvv}
                     </Fragment>
                 ) : null}
                 {paymentMethod.type === 'bankAccount' &&
@@ -34,9 +38,9 @@ export const PaymentView = ({ paymentMethod }: PaymentViewProps) => {
                         <br />
                         {paymentMethod.bankName}
                         <br />
-                        Routing number: {paymentMethod.routingNumber}
+                        {t('text.routingNumber')}: {paymentMethod.routingNumber}
                         <br />
-                        Account number: {paymentMethod.accountNumber}
+                        {t('text.accountNumber')}: {paymentMethod.accountNumber}
                     </Fragment>
                 ) : null}
             </p>

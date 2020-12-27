@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
@@ -13,6 +14,7 @@ export const bankAccountSchema = yup.object().shape({
 });
 
 export const BankAccountForm = () => {
+    const { t } = useTranslation();
     const { errors, register } = useFormContext();
 
     return (
@@ -21,7 +23,7 @@ export const BankAccountForm = () => {
                 <TextField
                     id="accountHolderName"
                     name="paymentMethod.accountHolderName"
-                    label="Account holder's name"
+                    label={t('text.accountHolderName')}
                     ref={register}
                     error={errors.paymentMethod?.accountHolderName?.message}
                 />
@@ -31,7 +33,7 @@ export const BankAccountForm = () => {
                 <TextField
                     id="bankName"
                     name="paymentMethod.bankName"
-                    label="Bank name"
+                    label={t('text.bankName')}
                     ref={register}
                     error={errors.paymentMethod?.bankName?.message}
                 />
@@ -42,7 +44,7 @@ export const BankAccountForm = () => {
                     <TextField
                         id="routingNumber"
                         name="paymentMethod.routingNumber"
-                        label="Routing number"
+                        label={t('text.routingNumber')}
                         ref={register}
                         error={errors.paymentMethod?.routingNumber?.message}
                     />
@@ -52,7 +54,7 @@ export const BankAccountForm = () => {
                     <TextField
                         id="accountNumber"
                         name="paymentMethod.accountNumber"
-                        label="Account number"
+                        label={t('text.accountNumber')}
                         ref={register}
                         error={errors.paymentMethod?.accountNumber?.message}
                     />

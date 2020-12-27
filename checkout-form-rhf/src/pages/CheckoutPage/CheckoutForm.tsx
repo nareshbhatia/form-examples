@@ -1,6 +1,7 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { Order, ShippingMethod } from '../../models';
 import {
@@ -33,6 +34,7 @@ export const CheckoutForm = ({
     onSubmit,
     onShippingMethodChanged,
 }: CheckoutFormProps) => {
+    const { t } = useTranslation();
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,
@@ -46,7 +48,7 @@ export const CheckoutForm = ({
                 <hr className="mt-4 mb3" />
 
                 <AddressForm
-                    title="Shipping Address"
+                    title={t('text.shippingAddress')}
                     parentName="shippingAddress"
                 />
                 <hr className="mt-4 mb3" />

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { StringUtils } from '@react-force/utils';
-import { Order, ShippingMethodNames } from '../../models';
+import { useTranslation } from 'react-i18next';
+import { Order } from '../../models';
 import { AddressView } from '../AddressView';
 import { PaymentView } from '../PaymentView';
+import { ShippingMethodText } from './ShippingMethodText';
 
 const { isBlank } = StringUtils;
 
@@ -11,6 +13,7 @@ export interface OrderDetailProps {
 }
 
 export const OrderDetail = ({ order }: OrderDetailProps) => {
+    const { t } = useTranslation();
     const {
         contactInfo,
         shippingAddress,
@@ -20,24 +23,29 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
 
     return (
         <Fragment>
-            <h4 className="text-muted">Order Detail</h4>
+            <h4 className="text-muted">{t('text.orderDetail')}</h4>
             <div className="border p-3">
-                <h6 className="mb-0">Contact Information</h6>
+                <h6 className="mb-0">{t('text.contactInfo')}</h6>
                 <p>Email: {contactInfo.email}</p>
 
                 {!isBlank(shippingAddress.firstName) ? (
                     <AddressView
-                        label="Shipping Address"
+                        label={t('text.shippingAddress')}
                         address={shippingAddress}
                     />
                 ) : null}
 
-                <h6 className="mb-0">Shipping Options</h6>
+                <h6 className="mb-0">{t('text.shippingOptions')}</h6>
                 <p>
-                    Shipping method:{' '}
-                    {ShippingMethodNames[shippingOptions.shippingMethod]}
+                    {t('text.shippingMethod')}:{' '}
+                    <ShippingMethodText
+                        shippingMethod={shippingOptions.shippingMethod}
+                    />
                     <br />
-                    Gift wrapping: {shippingOptions.giftWrapping ? 'Yes' : 'No'}
+                    {t('text.giftWrapping')}:{' '}
+                    {shippingOptions.giftWrapping
+                        ? t('text.yes')
+                        : t('text.no')}
                 </p>
 
                 <PaymentView paymentMethod={paymentMethod} />

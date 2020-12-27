@@ -18,4 +18,5 @@ next.d.ts
 
 # System Files
 .DS_Store
+.eslintcache
 Thumbs.db

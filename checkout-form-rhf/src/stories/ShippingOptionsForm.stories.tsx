@@ -2,9 +2,14 @@ import React, { Fragment, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
-import { ShippingOptionsForm, shippingOptionsSchema } from '../components';
-import { ShippingMethodNames, ShippingOptions } from '../models';
+import {
+    ShippingMethodText,
+    ShippingOptionsForm,
+    shippingOptionsSchema,
+} from '../components';
+import { ShippingOptions } from '../models';
 
 export default {
     title: 'ShippingOptionsForm',
@@ -20,6 +25,7 @@ const orderSchema = yup.object().shape({
 });
 
 export const ShippingOptionsFormStory = () => {
+    const { t } = useTranslation();
     const [order, setOrder] = useState<Order>({
         shippingOptions: {
             shippingMethod: 'ground',
@@ -55,10 +61,15 @@ export const ShippingOptionsFormStory = () => {
             <div className="mt-4">
                 <h5 className="mb-2">Form Values</h5>
                 <p>
-                    Shipping method:{' '}
-                    {ShippingMethodNames[shippingOptions.shippingMethod]}
+                    {t('text.shippingMethod')}:{' '}
+                    <ShippingMethodText
+                        shippingMethod={shippingOptions.shippingMethod}
+                    />
                     <br />
-                    Gift wrapping: {shippingOptions.giftWrapping ? 'Yes' : 'No'}
+                    {t('text.giftWrapping')}:{' '}
+                    {shippingOptions.giftWrapping
+                        ? t('text.yes')
+                        : t('text.no')}
                 </p>
             </div>
         </Fragment>
