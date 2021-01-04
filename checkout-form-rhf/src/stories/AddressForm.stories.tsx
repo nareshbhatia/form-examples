@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import {
     AddressForm,
-    addressSchema,
+    getAddressSchema,
     AddressView,
     Checkbox,
 } from '../components';
@@ -28,15 +28,15 @@ interface Company {
     address: Address;
 }
 
-const companySchema = yup.object().shape({
-    address: addressSchema,
-});
-
 export const SingleAddressStory = () => {
     const [company, setCompany] = useState<Company>({
         address: newAddress(),
     });
     const { address } = company;
+
+    const companySchema = yup.object().shape({
+        address: getAddressSchema(),
+    });
 
     const methods = useForm<Company>({
         mode: 'onBlur',
@@ -82,16 +82,6 @@ interface Order {
     shippingAddress: Address;
 }
 
-const orderSchema = yup.lazy((value) => {
-    const order = value as Order;
-    return yup.object().shape({
-        isShippingAddressSameAsBilling: yup.boolean().required(),
-        billingAddress: addressSchema,
-        shippingAddress: order.isShippingAddressSameAsBilling
-            ? yup.mixed().notRequired()
-            : addressSchema,
-    });
-});
 
 export const MultipleAddressStory = () => {
     const { t } = useTranslation();
@@ -101,7 +91,18 @@ export const MultipleAddressStory = () => {
         shippingAddress: newAddress(),
     });
     const { billingAddress, shippingAddress } = order;
-
+    const addressSchema = getAddressSchema()
+    const orderSchema = yup.lazy((value) => {
+        const order = value as Order;
+        return yup.object().shape({
+            isShippingAddressSameAsBilling: yup.boolean().required(),
+            billingAddress: addressSchema,
+            shippingAddress: order.isShippingAddressSameAsBilling
+                ? yup.mixed().notRequired()
+                : addressSchema,
+        });
+    });
+    
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,
