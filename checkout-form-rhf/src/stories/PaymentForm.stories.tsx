@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { PaymentForm, paymentSchema, PaymentView } from '../components';
+import { PaymentForm, getPaymentSchema, PaymentView } from '../components';
 import { PaymentMethod } from '../models';
 
 export default {
@@ -14,10 +14,6 @@ export default {
 interface Order {
     paymentMethod: PaymentMethod;
 }
-
-const orderSchema = yup.object().shape({
-    paymentMethod: paymentSchema,
-});
 
 export const PaymentFormStory = () => {
     const [order, setOrder] = useState<Order>({
@@ -31,6 +27,9 @@ export const PaymentFormStory = () => {
     });
     const { paymentMethod } = order;
 
+    const orderSchema = yup.object().shape({
+        paymentMethod: getPaymentSchema(),
+    });    
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,
