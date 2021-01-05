@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
-import { useTranslation } from 'react-i18next';
 import { TextField } from '../components';
 
 export default {
@@ -12,7 +11,6 @@ export const TextFieldStory = () => <TextField label="Name" />;
 TextFieldStory.storyName = 'TextField';
 
 export const TextFieldErrorStory = () => {
-    const { t } = useTranslation();
     return (
         <TextField
             label="Name"
