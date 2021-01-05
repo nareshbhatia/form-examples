@@ -4,12 +4,10 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
-export const contactInfoSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email('Email must be a valid email')
-        .required('Email is a required field'),
-});
+export const getContactInfoSchema = () =>
+    yup.object().shape({
+        email: yup.string().email().required(),
+    });
 
 export const ContactInfoForm = () => {
     const { t } = useTranslation();

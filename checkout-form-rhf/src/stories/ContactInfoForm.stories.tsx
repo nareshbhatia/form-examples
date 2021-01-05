@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Meta } from '@storybook/react/types-6-0';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { ContactInfoForm, contactInfoSchema } from '../components';
+import { ContactInfoForm, getContactInfoSchema } from '../components';
 import { ContactInfo } from '../models';
 
 export default {
@@ -15,10 +15,6 @@ interface Order {
     contactInfo: ContactInfo;
 }
 
-const orderSchema = yup.object().shape({
-    contactInfo: contactInfoSchema,
-});
-
 export const ContactInfoFormStory = () => {
     const [order, setOrder] = useState<Order>({
         contactInfo: {
@@ -27,6 +23,9 @@ export const ContactInfoFormStory = () => {
     });
     const { contactInfo } = order;
 
+    const orderSchema = yup.object().shape({
+        contactInfo: getContactInfoSchema(),
+    });
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,

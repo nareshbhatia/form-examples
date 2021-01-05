@@ -6,10 +6,8 @@ import { ShippingMethod } from '../../models';
 import { Checkbox, Radio } from '../Form';
 
 export const shippingOptionsSchema = yup.object().shape({
-    shippingMethod: yup
-        .string()
-        .required('Shipping method is a required field'),
-    giftWrapping: yup.boolean().required('Gift wrapping is a required field'),
+    shippingMethod: yup.string().required(),
+    giftWrapping: yup.boolean().required(),
 });
 
 export interface ShippingOptionsFormProps {

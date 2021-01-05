@@ -1,4 +1,7 @@
 import React, { Fragment, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ValidationError } from '../../models';
+import { ErrorMessage } from './ErrorMessage';
 
 interface InputInjectedProps {
     id?: string;
@@ -27,7 +30,7 @@ export interface LimitedTextFieldProps {
     ref?: React.Ref<any>;
 
     /** error text */
-    error?: string;
+    error?: ValidationError | string;
 
     renderContainer?: (props: InputInjectedProps) => JSX.Element;
 
@@ -54,6 +57,7 @@ export const LimitedTextField = React.forwardRef(
         }: LimitedTextFieldProps,
         ref
     ) => {
+        const { t } = useTranslation();
         const [value, setValue] = useState('');
         const remainingCount = maxCount - value.length;
 
@@ -77,11 +81,9 @@ export const LimitedTextField = React.forwardRef(
                     onChange: handleChange,
                 })}
                 <div className={remainingCount < 0 ? 'text-danger' : ''}>
-                    {remainingCount} characters
+                    {remainingCount} {t('text.characters')}
                 </div>
-                {error !== undefined ? (
-                    <div className="error-text">{error}</div>
-                ) : null}
+                <ErrorMessage error={error} />
             </Fragment>
         );
     }

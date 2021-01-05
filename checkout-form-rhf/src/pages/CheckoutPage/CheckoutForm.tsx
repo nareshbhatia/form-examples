@@ -6,22 +6,15 @@ import * as yup from 'yup';
 import { Order, ShippingMethod } from '../../models';
 import {
     AddressForm,
-    addressSchema,
+    getAddressSchema,
     ContactInfoForm,
-    contactInfoSchema,
+    getContactInfoSchema,
     PaymentForm,
-    paymentSchema,
+    getPaymentSchema,
     ShippingOptionsForm,
     shippingOptionsSchema,
 } from '../../components';
 import { CheckoutActions } from './CheckoutActions';
-
-const schema = yup.object().shape({
-    contactInfo: contactInfoSchema,
-    shippingAddress: addressSchema,
-    shippingOptions: shippingOptionsSchema,
-    paymentMethod: paymentSchema,
-});
 
 export interface CheckoutFormProps {
     order: Order;
@@ -34,6 +27,13 @@ export const CheckoutForm = ({
     onSubmit,
     onShippingMethodChanged,
 }: CheckoutFormProps) => {
+    const schema = yup.object().shape({
+        contactInfo: getContactInfoSchema(),
+        shippingAddress: getAddressSchema(),
+        shippingOptions: shippingOptionsSchema,
+        paymentMethod: getPaymentSchema(),
+    });
+
     const { t } = useTranslation();
     const methods = useForm<Order>({
         mode: 'onBlur',

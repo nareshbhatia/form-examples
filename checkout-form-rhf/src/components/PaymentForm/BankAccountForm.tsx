@@ -4,14 +4,13 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
-export const bankAccountSchema = yup.object().shape({
-    accountHolderName: yup
-        .string()
-        .required('Account holder name is a required field'),
-    bankName: yup.string().required('Bank name is a required field'),
-    routingNumber: yup.string().required('Routing number is a required field'),
-    accountNumber: yup.string().required('Account number is a required field'),
-});
+export const getBankAccountSchema = () =>
+    yup.object().shape({
+        accountHolderName: yup.string().required(),
+        bankName: yup.string().required(),
+        routingNumber: yup.string().required(),
+        accountNumber: yup.string().required(),
+    });
 
 export const BankAccountForm = () => {
     const { t } = useTranslation();

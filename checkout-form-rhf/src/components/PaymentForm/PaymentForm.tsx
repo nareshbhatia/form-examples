@@ -4,18 +4,19 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { PaymentMethod } from '../../models';
 import { Radio } from '../Form';
-import { BankAccountForm, bankAccountSchema } from './BankAccountForm';
-import { CreditCardForm, creditCardSchema } from './CreditCardForm';
+import { BankAccountForm, getBankAccountSchema } from './BankAccountForm';
+import { CreditCardForm, getCreditCardSchema } from './CreditCardForm';
 
-export const paymentSchema = yup.lazy((value) => {
-    if (value === undefined) {
-        return yup.mixed().notRequired();
-    }
-    const paymentMethod = value as PaymentMethod;
-    return paymentMethod.type === 'creditCard'
-        ? creditCardSchema
-        : bankAccountSchema;
-});
+export const getPaymentSchema = () =>
+    yup.lazy((value) => {
+        if (value === undefined) {
+            return yup.mixed().notRequired();
+        }
+        const paymentMethod = value as PaymentMethod;
+        return paymentMethod.type === 'creditCard'
+            ? getCreditCardSchema()
+            : getBankAccountSchema();
+    });
 
 export const PaymentForm = () => {
     const { t } = useTranslation();
