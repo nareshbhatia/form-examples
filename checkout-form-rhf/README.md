@@ -12,8 +12,13 @@ encounter when creating your own large complex form. For example,
 3. How to do conditional validation, e.g. changing validations dynamically based
    on the payment method?
 4. How to break large validation schemas into smaller composable schemas?
+5. How to incorporate i18n into your form?
 
 ![Screen Shot](assets/screen-shot.png)
+
+## Live Demo
+
+Try out a live demo [here](https://checkout-form-rhf.web.app/).
 
 ## Getting Started
 
