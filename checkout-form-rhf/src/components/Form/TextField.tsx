@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { ValidationError } from '../../models';
+import { ErrorMessage } from './ErrorMessage';
 
 interface InputInjectedProps {
     id?: string;
@@ -24,7 +26,7 @@ export interface TextFieldProps {
     ref?: React.Ref<any>;
 
     /** error text */
-    error?: string;
+    error?: ValidationError | string;
 
     renderContainer?: (props: InputInjectedProps) => JSX.Element;
 
@@ -64,9 +66,7 @@ export const TextField = React.forwardRef(
                     onBlur,
                     onChange,
                 })}
-                {error !== undefined ? (
-                    <div className="error-text">{error}</div>
-                ) : null}
+                <ErrorMessage error={error} />
             </Fragment>
         );
     }

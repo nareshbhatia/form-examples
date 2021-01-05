@@ -4,15 +4,16 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
-export const getAddressSchema = () => (yup.object().shape({
-    firstName: yup.string().required().min(2),
-    lastName: yup.string().required().min(2),
-    company: yup.string(),
-    address: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    zip: yup.string().required(),
-}));
+export const getAddressSchema = () =>
+    yup.object().shape({
+        firstName: yup.string().required().min(2),
+        lastName: yup.string().required().min(2),
+        company: yup.string(),
+        address: yup.string().required(),
+        city: yup.string().required(),
+        state: yup.string().required(),
+        zip: yup.string().required(),
+    });
 
 export interface AddressFormProps {
     title?: string;

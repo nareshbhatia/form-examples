@@ -82,7 +82,6 @@ interface Order {
     shippingAddress: Address;
 }
 
-
 export const MultipleAddressStory = () => {
     const { t } = useTranslation();
     const [order, setOrder] = useState<Order>({
@@ -91,7 +90,7 @@ export const MultipleAddressStory = () => {
         shippingAddress: newAddress(),
     });
     const { billingAddress, shippingAddress } = order;
-    const addressSchema = getAddressSchema()
+    const addressSchema = getAddressSchema();
     const orderSchema = yup.lazy((value) => {
         const order = value as Order;
         return yup.object().shape({
@@ -102,7 +101,7 @@ export const MultipleAddressStory = () => {
                 : addressSchema,
         });
     });
-    
+
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,

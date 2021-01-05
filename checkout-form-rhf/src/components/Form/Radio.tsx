@@ -1,4 +1,6 @@
 import React from 'react';
+import { ValidationError } from '../../models';
+import { ErrorMessage } from './ErrorMessage';
 
 interface InputInjectedProps {
     id?: string;
@@ -28,7 +30,7 @@ export interface RadioProps {
     ref?: React.Ref<any>;
 
     /** error text */
-    error?: string;
+    error?: ValidationError | string;
 
     renderContainer?: (props: InputInjectedProps) => JSX.Element;
 
@@ -72,9 +74,7 @@ export const Radio = React.forwardRef(
                         {label}
                     </label>
                 ) : null}
-                {error !== undefined ? (
-                    <div className="error-text">{error}</div>
-                ) : null}
+                <ErrorMessage error={error} />
             </div>
         );
     }

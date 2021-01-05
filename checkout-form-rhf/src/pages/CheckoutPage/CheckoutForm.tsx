@@ -32,8 +32,8 @@ export const CheckoutForm = ({
         shippingAddress: getAddressSchema(),
         shippingOptions: shippingOptionsSchema,
         paymentMethod: getPaymentSchema(),
-    })
-    
+    });
+
     const { t } = useTranslation();
     const methods = useForm<Order>({
         mode: 'onBlur',

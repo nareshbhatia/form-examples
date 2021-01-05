@@ -7,15 +7,16 @@ import { Radio } from '../Form';
 import { BankAccountForm, getBankAccountSchema } from './BankAccountForm';
 import { CreditCardForm, getCreditCardSchema } from './CreditCardForm';
 
-export const getPaymentSchema = () => (yup.lazy((value) => {
-    if (value === undefined) {
-        return yup.mixed().notRequired();
-    }
-    const paymentMethod = value as PaymentMethod;
-    return paymentMethod.type === 'creditCard'
-        ? getCreditCardSchema()
-        : getBankAccountSchema();
-}));
+export const getPaymentSchema = () =>
+    yup.lazy((value) => {
+        if (value === undefined) {
+            return yup.mixed().notRequired();
+        }
+        const paymentMethod = value as PaymentMethod;
+        return paymentMethod.type === 'creditCard'
+            ? getCreditCardSchema()
+            : getBankAccountSchema();
+    });
 
 export const PaymentForm = () => {
     const { t } = useTranslation();

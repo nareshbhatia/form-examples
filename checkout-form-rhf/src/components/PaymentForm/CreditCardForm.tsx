@@ -4,14 +4,13 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { TextField } from '../Form';
 
-export const getCreditCardSchema = () => (
+export const getCreditCardSchema = () =>
     yup.object().shape({
         nameOnCard: yup.string().required(),
         cardNumber: yup.string().required(),
         expiration: yup.string().required(),
         cvv: yup.number().required(),
-    })
-);
+    });
 
 export const CreditCardForm = () => {
     const { t } = useTranslation();

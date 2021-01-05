@@ -7,6 +7,7 @@
     "bankName": "Nombre del banco",
     "billingAddress": "Dirección de Facturación",
     "cardNumber": "Número de tarjeta",
+    "characters": "caracteres",
     "checkout": "Revisa",
     "city": "Ciudad",
     "companyOptional": "Companía (opcional)",
@@ -40,5 +41,13 @@
     "state": "Estado",
     "yes": "Si",
     "zip": "Código Postal"
+  },
+  "validations": {
+    "email": "El correo electrónico es invalido",
+    "invalid": "El campo no es válido",
+    "invalidType": "Tiene que ser un {{type}}",
+    "required": "Se requiere campo",
+    "stringMin": "Debe tener al menos {{min}} caracteres",
+    "stringMax": "Debe tener como máximo {{max}} caracteres"
   }
 }

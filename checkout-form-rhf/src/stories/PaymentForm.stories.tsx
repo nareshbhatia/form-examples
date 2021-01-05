@@ -29,7 +29,7 @@ export const PaymentFormStory = () => {
 
     const orderSchema = yup.object().shape({
         paymentMethod: getPaymentSchema(),
-    });    
+    });
     const methods = useForm<Order>({
         mode: 'onBlur',
         defaultValues: order,
