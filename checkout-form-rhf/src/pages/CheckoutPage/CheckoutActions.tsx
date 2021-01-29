@@ -11,7 +11,7 @@ export const CheckoutActions = ({ orderTotal }: CheckoutActionsProps) => {
     const orderTotalStr = NumberUtils.formatAsMoney(orderTotal);
 
     return (
-        <div className="d-flex align-items-center border p-2 mt-2 mb-5">
+        <div className="d-flex align-items-center mt-2 mb-5">
             <button className="btn btn-primary" type="submit">
                 {t('text.placeYourOrder')}
             </button>

@@ -24,7 +24,7 @@ export const OrderDetail = ({ order }: OrderDetailProps) => {
     return (
         <Fragment>
             <h4 className="text-muted">{t('text.orderDetail')}</h4>
-            <div className="border p-3">
+            <div className="border p-3 bg-white">
                 <h6 className="mb-0">{t('text.contactInfo')}</h6>
                 <p>Email: {contactInfo.email}</p>
 
