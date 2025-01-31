@@ -16,5 +16,5 @@ export interface BankAccountPayment {
     accountNumber: string;
 }
 
-/** TypeScript discriminating union */
+/** TypeScript discriminated union */
 export type PaymentMethod = CreditCardPayment | BankAccountPayment;
